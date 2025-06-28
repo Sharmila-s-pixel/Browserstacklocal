@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Cross-Browser Suite" parallel="tests" thread-count="5">
+
+    <test name="Windows 10 - Chrome">
+        <parameter name="os" value="Windows"/>
+        <parameter name="os_version" value="10"/>
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="browser_version" value="latest"/>
+        <classes>
+            <class name="org.example.browserstack.BSAssignment"/>
+        </classes>
+    </test>
+
+    <test name="Windows 11 - Edge">
+        <parameter name="os" value="Windows"/>
+        <parameter name="os_version" value="11"/>
+        <parameter name="browser" value="Edge"/>
+        <parameter name="browser_version" value="latest"/>
+        <classes>
+            <class name="org.example.browserstack.BSAssignment"/>
+        </classes>
+    </test>
+
+    <test name="OS X Ventura - Safari">
+        <parameter name="os" value="OS X"/>
+        <parameter name="os_version" value="Ventura"/>
+        <parameter name="browser" value="Safari"/>
+        <parameter name="browser_version" value="latest"/>
+        <classes>
+            <class name="org.example.browserstack.BSAssignment"/>
+        </classes>
+    </test>
+
+    <test name="Windows 10 - Firefox">
+        <parameter name="os" value="Windows"/>
+        <parameter name="os_version" value="10"/>
+        <parameter name="browser" value="Firefox"/>
+        <parameter name="browser_version" value="latest"/>
+        <classes>
+            <class name="org.example.browserstack.BSAssignment"/>
+        </classes>
+    </test>
+
+    <test name="macOS Monterey - Chrome">
+        <parameter name="os" value="OS X"/>
+        <parameter name="os_version" value="Monterey"/>
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="browser_version" value="latest"/>
+        <classes>
+            <class name="org.example.browserstack.BSAssignment"/>
+        </classes>
+    </test>
+
+</suite>

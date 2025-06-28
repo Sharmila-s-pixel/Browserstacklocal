@@ -1,0 +1,139 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>bs</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>bs</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <surefire.version>3.0.0-M9</surefire.version>
+    <config.file>config/sample-test.testng.xml</config.file>
+
+  </properties>
+
+  <dependencies>
+    <!-- TestNG -->
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.10.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Selenium -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>4.21.0</version>
+    </dependency>
+
+    <!-- WebDriverManager -->
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>5.7.0</version>
+    </dependency>
+
+    <!-- Google Cloud Translate -->
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>google-cloud-translate</artifactId>
+      <version>2.31.0</version>
+    </dependency>
+
+    <!-- Apache Commons Text -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-text</artifactId>
+      <version>1.10.0</version>
+    </dependency>
+
+    <!-- JSON -->
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20240303</version>
+    </dependency>
+
+    <!-- BrowserStack Java SDK -->
+    <dependency>
+      <groupId>com.browserstack</groupId>
+      <artifactId>browserstack-java-sdk</artifactId>
+      <version>1.32.13</version> <!-- Replace with the latest version -->
+    </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.1.0</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Compiler Plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+        </configuration>
+      </plugin>
+
+      <!-- Copy BrowserStack SDK JAR -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.6.0</version>
+        <executions>
+          <execution>
+            <id>copy-browserstack-sdk</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <dependency>
+                    <groupId>com.browserstack</groupId>
+                    <artifactId>browserstack-java-sdk</artifactId>
+                    <version>1.32.13</version> <!-- Replace with the latest version -->
+                    <destFileName>browserstack-java-sdk.jar</destFileName>
+                  </dependency>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${project.build.directory}/libs</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Surefire Plugin for TestNG -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${surefire.version}</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>${config.file}</suiteXmlFile>
+          </suiteXmlFiles>
+          <!--          <argLine>-javaagent:${project.build.directory}/libs/browserstack-java-sdk.jar</argLine>-->
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
